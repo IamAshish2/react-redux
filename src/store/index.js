@@ -1,4 +1,3 @@
-import { act } from "react";
 import {createStore} from "redux";
 
 const INITIAL_VALUE = {

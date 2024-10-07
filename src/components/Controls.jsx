@@ -1,36 +1,53 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
+import { counterActions } from "../store/counter";
+import { privacyActions } from "../store/privacy";
 
 const Controls = () => {
-  const inputVal = useRef();
   const dispatch = useDispatch();
+  const inputVal = useRef();
 
   const handleIncrement = () => {
-    const newAction = {
+    /*const newAction = {
       type: "INCREMENT",
     };
     dispatch(newAction);
+    console.log("increment called",counterActions.increment());
+    */
+
+    dispatch(counterActions.increment());
   };
 
   const handleDecrement = () => {
-    const newAction = {
+    /*const newAction = {
       type: "DECREMENT",
     };
-    dispatch(newAction);
+    console.log("decrement called");
+    dispatch(newAction);*/
+
+    dispatch(counterActions.decrement());
   };
 
   const handleSubtract = () => {
-    const newAction = {
+    /* const newAction = {
       type: "SUBTRACT",
       payload: {
         value: parseInt(inputVal.current.value),
       },
     };
     dispatch(newAction);
+    */
+
+    dispatch(
+      counterActions.subtract({
+        value: parseInt(inputVal.current.value),
+      })
+    );
     inputVal.current.value = "";
   };
 
   const handleAdd = () => {
+    /*
     const newAction = {
       type: "ADD",
       payload: {
@@ -38,13 +55,16 @@ const Controls = () => {
       },
     };
     dispatch(newAction);
+    */
+    dispatch(counterActions.add(Number(inputVal.current.value)));
     inputVal.current.value = "";
   };
 
   const handlePrivacyToggle = () => {
-    dispatch({
-      type: "PRIVACY_TOGGLE",
-    });
+    // dispatch({
+    //   type: "PRIVACY_TOGGLE",
+    // });
+    dispatch(privacyActions.toggle());
   };
 
   return (
